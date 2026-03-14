@@ -4,7 +4,11 @@
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
-#[command(name = "stellar-sim", about = "A local Stellar/Soroban transaction simulator", version)]
+#[command(
+    name = "stellar-sim",
+    about = "A local Stellar/Soroban transaction simulator",
+    version
+)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -59,7 +63,13 @@ enum Commands {
 fn main() {
     let cli = Cli::parse();
     match cli.command {
-        Commands::Simulate { wasm, function, args, ledger, json } => {
+        Commands::Simulate {
+            wasm,
+            function,
+            args,
+            ledger,
+            json,
+        } => {
             println!("Simulating {} in {}", function, wasm);
             let _ = (args, ledger, json);
         }
@@ -69,8 +79,15 @@ fn main() {
         Commands::Inspect { wasm } => {
             println!("Inspecting WASM: {}", wasm);
         }
-        Commands::Snapshot { rpc, contract, output } => {
-            println!("Snapshotting contract {} from {} to {}", contract, rpc, output);
+        Commands::Snapshot {
+            rpc,
+            contract,
+            output,
+        } => {
+            println!(
+                "Snapshotting contract {} from {} to {}",
+                contract, rpc, output
+            );
         }
     }
 }
